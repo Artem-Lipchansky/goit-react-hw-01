@@ -1,36 +1,45 @@
-import css from './Profile.module.css';
+import css from './Profile.module.css'
 
-const Profile = ({
-  name,
-  tag,
-  location,
-  image = 'https://cdn-icons-png.flaticon.com/512/1077/1077012.png',
-  stats,
-}) => {
+export default function Profile({
+  user: {
+    username,
+    tag,
+    location,
+    avatar,
+    stats: { followers, views, likes },
+  },
+}) {
   return (
-    <div className={css.card}>
-      <div className={css.wrapper}>
-        <img className={css.avatar} src={image} alt="User avatar" />
-        <p className={css.title}>{name}</p>
-        <p className={css.text}>@{tag}</p>
-        <p className={css.text}>{location}</p>
+    <div className="section">
+      <div className={css.card}>
+        <div className={css.cardInfo}>
+          <img
+            src={avatar}
+            alt={username + " avatar"}
+            className={css.avatar}
+            width="80"
+            height="80"
+          />
+          <h3 className={css.infoTitle}>{username}</h3>
+          <p className={css.infoText}>@{tag}</p>
+          <p className={css.infoText}>{location}</p>
+        </div>
+
+        <ul className={css.list}>
+          <li className={css.listItem}>
+            <span className={css.statsText}>Followers</span>
+            <span className={css.statsCount}>{followers}</span>
+          </li>
+          <li className={css.listItem}>
+            <span className={css.statsText}>Views</span>
+            <span className={css.statsCount}>{views}</span>
+          </li>
+          <li className={css.listItem}>
+            <span className={css.statsText}>Likes</span>{" "}
+            <span className={css.statsCount}>{likes}</span>
+          </li>
+        </ul>
       </div>
-      <ul className={css.list}>
-        <li className={css.item}>
-          <span>Followers</span>
-          <span className={css.value}>{stats.followers}</span>
-        </li>
-        <li className={css.item}>
-          <span>Views</span>
-          <span className={css.value}>{stats.views}</span>
-        </li>
-        <li className={css.item}>
-          <span>Likes</span>
-          <span className={css.value}>{stats.likes}</span>
-        </li>
-      </ul>
     </div>
   );
-};
-
-export default Profile;
+}
